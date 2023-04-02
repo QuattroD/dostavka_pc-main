@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "528636704037",
+    "project_id": "dostavka-fd06f",
+    "storage_bucket": "dostavka-fd06f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528636704037:android:11acaa770d6b67935556cc",
+        "android_client_info": {
+          "package_name": "com.example.dostavka_pc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528636704037-nogslp83rkub2a680rai2koj0pncq9kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxsmnEf1pM_MWp2R99O5AvDTIKgOLyH3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528636704037-nogslp83rkub2a680rai2koj0pncq9kq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
