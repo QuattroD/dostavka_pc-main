@@ -70,23 +70,6 @@ class MenuDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(
-            Icons.settings,
-            color: Color.fromARGB(255, 198, 218, 225)
-          ),
-          title: const Text(
-            'Settings',
-            style: TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-          ),
-          trailing: const Icon(
-            Icons.arrow_right,
-            color: Color.fromARGB(255, 233, 241, 243),
-          ),
-          onTap: () {
-            
-          },
-        ),
-        ListTile(
-          leading: const Icon(
             Icons.help,
             color: Color.fromARGB(255, 198, 218, 225),
           ),

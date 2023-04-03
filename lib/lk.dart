@@ -1,138 +1,173 @@
 import 'package:flutter/material.dart';
 
-class PersonAcc extends StatefulWidget {
-  const PersonAcc({super.key});
+class PersonAcc extends StatelessWidget {
+  const PersonAcc({Key? key}) : super(key: key);
 
-  @override
-  State<PersonAcc> createState() => _PersonAccState();
-}
-
-class _PersonAccState extends State<PersonAcc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
-      appBar: AppBar(
-        title: const Center(child: Text('Личный кабинет'),),
-        backgroundColor: const Color.fromARGB(255, 126, 184, 185),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  // controller: ,
-                  style: const TextStyle(color: Colors.white),
-                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  decoration: InputDecoration(
-                    label: const Text(
-                      "Name",  
-                    ),
-                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    prefixIcon: const Icon(
-                      Icons.person,
-                      color: Color.fromARGB(255, 233, 241, 243),
-                    ),
+      body: Column(
+        children: [
+          const Expanded(flex: 2, child: _TopPortion()),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    "",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  style: const TextStyle(color: Colors.white),
-                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  decoration: InputDecoration(
-                    label: const Text(
-                      "Email",
-                    ),
-                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    prefixIcon: const Icon(
-                      Icons.email,
-                      color: Color.fromARGB(255, 233, 241, 243),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  style: const TextStyle(color: Colors.white),
-                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    label: const Text(
-                      "Password",
-                    ),
-                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    prefixIcon: const Icon(
-                      Icons.password,
-                      color: Color.fromARGB(255, 233, 241, 243),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.06,
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    shape: MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FloatingActionButton.extended(
+                        onPressed: () {},
+                        heroTag: 'settings',
+                        elevation: 0,
+                        label: const Text("Settings"),
+                        icon: const Icon(Icons.settings),
                       ),
-                    ),
-                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 126, 184, 185)),
+                      const SizedBox(width: 16.0),
+                      FloatingActionButton.extended(
+                        onPressed: () {},
+                        heroTag: 'history',
+                        elevation: 0,
+                        backgroundColor: Colors.red,
+                        label: const Text("History"),
+                        icon: const Icon(Icons.shopping_basket),
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-
-                  },
-                  child: const Text("Edit"),
-                ),
+                  const SizedBox(height: 16),
+                  const _ProfileInfoRow()
+                ],
               ),
-            ]
+            ),
           ),
-          ) 
+        ],
       ),
+    );
+  }
+}
+
+class _ProfileInfoRow extends StatelessWidget {
+  const _ProfileInfoRow({Key? key}) : super(key: key);
+
+  final List<ProfileInfoItem> _items = const [
+    ProfileInfoItem("Promocode", 4),
+    ProfileInfoItem("Notify", 13),
+    ProfileInfoItem("Following", 200),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      constraints: const BoxConstraints(maxWidth: 400),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: _items
+            .map((item) => Expanded(
+                    child: Row(
+                  children: [
+                    if (_items.indexOf(item) != 0) const VerticalDivider(),
+                    Expanded(child: _singleItem(context, item)),
+                  ],
+                )))
+            .toList(),
+      ),
+    );
+  }
+
+  Widget _singleItem(BuildContext context, ProfileInfoItem item) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              item.value.toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          Text(
+            item.title,
+            style: Theme.of(context).textTheme.caption,
+          )
+        ],
+      );
+}
+
+class ProfileInfoItem {
+  final String title;
+  final int value;
+  const ProfileInfoItem(this.title, this.value);
+}
+
+class _TopPortion extends StatelessWidget {
+  const _TopPortion({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: 50),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Color.fromARGB(255, 59, 158, 162), Color.fromARGB(255, 126, 184, 185)]),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+              )),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            width: 150,
+            height: 150,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 38, 163, 42), shape: BoxShape.circle),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
