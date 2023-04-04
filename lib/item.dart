@@ -1,57 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 
-class ItemPages extends StatelessWidget {
+List<String> basketuser = <String>[];
+
+class ItemPages extends StatefulWidget {
   const ItemPages({super.key});
 
+  @override
+  State<ItemPages> createState() => _ItemPagesState();
+}
+
+  class _ItemPagesState extends State<ItemPages> {
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: itemList.map(
         (e) {
-          return SizedBox(
-            height: 250,
-            width: 19,
-            child: Card(
-              shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-              elevation: 5,
-              child: Column(
-                children: <Widget>[
-                   Image(
-                    image: NetworkImage(e.img.toString()),
-                    width: double.maxFinite,
-                    height: 140,
-                    fit: BoxFit.cover,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Row(mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(e.title!),
-                            ],
-                          ),
-                          IconButton(
-                            onPressed: () {
-
-                            }, 
-                            icon: const Icon(Icons.add_shopping_cart)
-                            )
-                        ],
-                      ),
-                    )
-                ],
+          return GFCard( 
+            elevation: 10,
+            boxFit: BoxFit.fill,
+            titlePosition: GFPosition.start,
+            image: Image.network(
+              e.img.toString(),
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.fill
               ),
+            content: Text(e.title.toString()),
+            showImage: true,
+            buttonBar: GFButtonBar(
+              children: <Widget>[
+                GFButton(
+                  onPressed: () {
+                    setState(() {
+                      basketuser.length;
+                    });
+                    basketuser.add(e.title.toString()); 
+                    FirebaseFirestore.instance.collection('Basket').add(
+                      {
+                        'id': e.id,
+                        'discription': e.discription,
+                        'title': e.title
+                      }
+                    );
+                  },
+                  text: 'Buy',
+                  color: const Color.fromARGB(255, 59, 158, 162),
+                ),
+              ],
             ),
           );
         }
       ).toList(),
     );
   }
-}
+} 
 
 class Item {
   int? id;
@@ -80,4 +84,30 @@ List<Item> itemList = [
     img: 'https://ru.gecid.com/data/video/201902150800-55142/img/09_amd_radeon_rx_590.jpg',
     discription: 'test',
   ),
+  Item(
+    id: 2,
+    title: 'GTX 1660 Palit',
+    img: 'https://www.kitguru.net/wp-content/uploads/2019/10/featured-1.jpg',
+    discription: 'test',
+  ),
+  Item(
+    id: 3,
+    title: 'RX 580',
+    img: 'https://ru.gecid.com/data/video/201902150800-55142/img/09_amd_radeon_rx_590.jpg',
+    discription: 'test',
+  ),
+  Item(
+    id: 2,
+    title: 'GTX 1660 Palit',
+    img: 'https://www.kitguru.net/wp-content/uploads/2019/10/featured-1.jpg',
+    discription: 'test',
+  ),
+  Item(
+    id: 3,
+    title: 'RX 580',
+    img: 'https://ru.gecid.com/data/video/201902150800-55142/img/09_amd_radeon_rx_590.jpg',
+    discription: 'test',
+  ),
 ];
+
+  

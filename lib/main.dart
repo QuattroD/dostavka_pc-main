@@ -1,3 +1,6 @@
+import 'package:dostavka_pc/basket.dart';
+import 'package:dostavka_pc/history.dart';
+import 'package:dostavka_pc/edit_profile.dart';
 import 'package:dostavka_pc/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:dostavka_pc/home.dart';
@@ -26,6 +29,9 @@ class MyThemeApp extends StatelessWidget {
         '/reg': (context) => const RegPage(),
         '/shop':(context) => const ShopPage(),
         '/lk':(context) => const PersonAcc(),
+        '/edit':(context) => const EditProfilePage(),
+        '/history':(context) => const HistoryPage(),
+        '/basket':(context) => const BasketPage(),
       },
     );
   }

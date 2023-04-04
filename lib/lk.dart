@@ -1,8 +1,12 @@
+import 'package:dostavka_pc/item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+
+var currentUser = FirebaseAuth.instance.currentUser;
 
 class PersonAcc extends StatelessWidget {
   const PersonAcc({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,10 +20,10 @@ class PersonAcc extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "",
+                    currentUser!.email.toString(),
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -27,15 +31,19 @@ class PersonAcc extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
-                        onPressed: () {},
-                        heroTag: 'settings',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/edit');
+                        },
+                        heroTag: 'editprofile',
                         elevation: 0,
-                        label: const Text("Settings"),
-                        icon: const Icon(Icons.settings),
+                        label: const Text("Edit profile"),
+                        icon: const Icon(Icons.edit),
                       ),
                       const SizedBox(width: 16.0),
                       FloatingActionButton.extended(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/history');
+                        },
                         heroTag: 'history',
                         elevation: 0,
                         backgroundColor: Colors.red,
@@ -45,7 +53,7 @@ class PersonAcc extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  const _ProfileInfoRow()
+                  const _ProfileInfoRow(),
                 ],
               ),
             ),
@@ -60,9 +68,8 @@ class _ProfileInfoRow extends StatelessWidget {
   const _ProfileInfoRow({Key? key}) : super(key: key);
 
   final List<ProfileInfoItem> _items = const [
-    ProfileInfoItem("Promocode", 4),
+    ProfileInfoItem("Promocodes", 4),
     ProfileInfoItem("Notify", 13),
-    ProfileInfoItem("Following", 200),
   ];
 
   @override
@@ -100,7 +107,7 @@ class _ProfileInfoRow extends StatelessWidget {
           ),
           Text(
             item.title,
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           )
         ],
       );
@@ -126,7 +133,7 @@ class _TopPortion extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color.fromARGB(255, 59, 158, 162), Color.fromARGB(255, 126, 184, 185)]),
+                  colors: [Color.fromARGB(255, 59, 158, 162), Color.fromARGB(255, 144, 210, 211)]),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),

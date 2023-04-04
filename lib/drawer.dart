@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+var userInfo = FirebaseAuth.instance;
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({super.key});
@@ -31,8 +34,8 @@ class MenuDrawer extends StatelessWidget {
                       "https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png"),
                 ),
               ),
-              accountName: const Text('test'),
-              accountEmail: const Text('test')),
+              accountName: Text(userInfo.currentUser!.email.toString()),
+              accountEmail: const Text('')),
         ),
         ListTile(
           leading: const Icon(

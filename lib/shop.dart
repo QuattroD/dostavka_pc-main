@@ -20,6 +20,44 @@ class _ShopPageState extends State<ShopPage> {
       appBar: AppBar(
         title: const Center(child: Text('Machinalis scientia'),),
         backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        actions: [
+          Stack(
+            children: <Widget>[
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/basket');
+                },
+                icon: const Icon(Icons.shopping_cart),
+              ),
+            ],
+          ),
+          basketuser.isEmpty ? Container() :
+          Positioned(
+            child: Stack(
+              children: <Widget>[
+                const Icon(
+                  Icons.brightness_1,
+                  size: 30,
+                  color: Colors.amber,
+                ),
+                Positioned(
+                  top: 9,
+                  right: 9,
+                  child: Center(
+                    child: Text(
+                      basketuser.length.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
       body: list.elementAt(0),
     );
