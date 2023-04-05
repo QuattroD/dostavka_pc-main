@@ -61,7 +61,7 @@ class ItemPages extends StatefulWidget {
                           child: Container(
                             color: const Color.fromARGB(255, 59, 158, 162),
                             height: 400,
-                            child: Text(e.title.toString()),                         
+                            child: Text(e.title.toString()  ),                         
                           )
                         );
                       }
