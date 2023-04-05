@@ -16,6 +16,13 @@ class _PaymentPageState extends State<PaymentPage> {
         title: const Text('Payment'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        actions: [
+          IconButton(onPressed: () {
+            Navigator.pushNamed(context, '/yandex');
+          }, 
+          icon: const Icon(Icons.map)
+          )
+        ],
       ),
     );
   }

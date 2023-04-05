@@ -1,11 +1,15 @@
 package com.example.dostavka_pc
 
+import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
-import com.yandex.mapkit.MapKitFactory;
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugins.GeneratedPluginRegistrant
+import com.yandex.mapkit.MapKitFactory
+
 
 class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-    MapKitFactory.setLocale("YOUR_LOCALE") // Your preferred language. Not required, defaults to system language
-    MapKitFactory.setApiKey("YOUR_API_KEY") // Your generated API key
+    MapKitFactory.setApiKey("4093e85c-fca8-452e-87de-f65a8389304c") // Your generated API key
     super.configureFlutterEngine(flutterEngine)
+  }
 }

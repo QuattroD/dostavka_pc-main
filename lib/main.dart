@@ -1,3 +1,4 @@
+import 'package:dostavka_pc/YandexMaps/map_screen.dart';
 import 'package:dostavka_pc/basket.dart';
 import 'package:dostavka_pc/history.dart';
 import 'package:dostavka_pc/edit_profile.dart';
@@ -34,6 +35,7 @@ class MyThemeApp extends StatelessWidget {
         '/history':(context) => const HistoryPage(),
         '/basket':(context) => const BasketPage(),
         '/payment':(context) => const PaymentPage(),
+        '/yandex':(context) => const MapScreen()
       },
     );
   }
