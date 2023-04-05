@@ -1,17 +1,52 @@
-import 'package:dostavka_pc/item.dart';
+import 'item.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class BasketPage extends StatelessWidget {
+
+class BasketPage extends StatefulWidget {
   const BasketPage({super.key});
+
+  @override
+  State<BasketPage> createState() => _BasketPagesState();
+}
+
+  class _BasketPagesState extends State<BasketPage> {
+  TextEditingController searchController = TextEditingController();
+  List<String> newBasketUser = List.from(basketuser);
+  onItemSearch(String value) {
+    setState(
+      () {
+        newBasketUser = basketuser.where((element) => element == searchController.toString()).toList();
+      },
+    );
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
     backgroundColor: const Color.fromARGB(255, 59, 158, 162),
       appBar: AppBar(
-        title: const Center(child: Text('Basket'),),
+        title: TextField(
+          decoration: const InputDecoration(
+            label: Text('Name')
+          ),
+          controller: searchController,
+          onChanged: onItemSearch,
+        ),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 126, 184, 185),
         actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                searchController.clear();
+
+              });
+            },
+            icon: const Icon(Icons.close),
+          ),
           basketuser.isEmpty ? Container() :
           IconButton(
             onPressed: () {
@@ -21,7 +56,7 @@ class BasketPage extends StatelessWidget {
           )
         ],
       ),
-      body: basketuser.isEmpty ? Center(
+      body: newBasketUser.isEmpty ? Center(
         child: InkWell(
           child: const Text(
             'Buy something? ಠ_ಠ',
@@ -35,14 +70,19 @@ class BasketPage extends StatelessWidget {
       ) : ListView.builder(
       itemCount: basketuser.length,
       prototypeItem: ListTile(
-        title: Text(basketuser.first),
+        title: Text(newBasketUser.first),
       ),
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(basketuser[index]),
+          title: Text(newBasketUser[index]),
           leading: IconButton(
-            onPressed: () {
+            onPressed: () {     
+              setState(() {
+                basketuser[index];
+              });
+              FirebaseFirestore.instance.collection('Basket').doc(basketuser[index]).delete();
               basketuser.remove(basketuser[index]);
+                           
             }, 
             icon: const Icon(Icons.delete_forever)
           ),

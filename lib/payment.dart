@@ -13,7 +13,8 @@ class _PaymentPageState extends State<PaymentPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 59, 158, 162),
       appBar: AppBar(
-        title: const Center(child: Text('Payment'),),
+        title: const Text('Payment'),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 126, 184, 185),
       ),
     );

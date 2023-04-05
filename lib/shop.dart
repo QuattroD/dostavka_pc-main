@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'item.dart';
+import 'drawer.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
-  
 }
 
 class _ShopPageState extends State<ShopPage> {
@@ -17,9 +17,10 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      drawer: const MenuDrawer(),
       appBar: AppBar(
-        title: const Center(child: Text('Machinalis scientia'),),
-        centerTitle: true,
+        title: const Text('Machinalis scientia'),
+        centerTitle: true,  
         backgroundColor: const Color.fromARGB(255, 126, 184, 185),
         actions: [
           Stack(
@@ -43,7 +44,7 @@ class _ShopPageState extends State<ShopPage> {
                 ),
                 Positioned(
                   top: 9,
-                  right: 9,
+                  right: 11,
                   child: Center(
                     child: Text(
                       basketuser.length.toString(),
