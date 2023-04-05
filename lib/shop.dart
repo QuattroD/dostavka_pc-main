@@ -19,6 +19,7 @@ class _ShopPageState extends State<ShopPage> {
       backgroundColor: const Color.fromARGB(255, 59, 158, 162),
       appBar: AppBar(
         title: const Center(child: Text('Machinalis scientia'),),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 126, 184, 185),
         actions: [
           Stack(

@@ -7,6 +7,7 @@ import 'package:dostavka_pc/home.dart';
 import 'auth.dart';
 import 'reg.dart';
 import 'lk.dart';
+import 'payment.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -32,6 +33,7 @@ class MyThemeApp extends StatelessWidget {
         '/edit':(context) => const EditProfilePage(),
         '/history':(context) => const HistoryPage(),
         '/basket':(context) => const BasketPage(),
+        '/payment':(context) => const PaymentPage(),
       },
     );
   }

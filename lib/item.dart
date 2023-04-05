@@ -48,6 +48,28 @@ class ItemPages extends StatefulWidget {
                   text: 'Buy',
                   color: const Color.fromARGB(255, 59, 158, 162),
                 ),
+                GFButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25)
+                              ),
+                          child: Container(
+                            color: const Color.fromARGB(255, 59, 158, 162),
+                            height: 400,
+                            child: Text(e.title.toString()),                         
+                          )
+                        );
+                      }
+                    );
+                  },
+                  text: 'Info',
+                  color: const Color.fromARGB(255, 59, 158, 162),
+                ),
               ],
             ),
           );
