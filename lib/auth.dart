@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dostavka_pc/model.dart';
 import 'package:dostavka_pc/service.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 TextEditingController  login = TextEditingController();
 TextEditingController  password= TextEditingController();
@@ -18,14 +19,16 @@ class AuthPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Machinalis scientia",
-                    style: TextStyle(
+                    "{ } DevKit",
+                    style: GoogleFonts.lobster(
+                      textStyle: const TextStyle(
                       color: Color.fromARGB(255, 233, 241, 243),
                       fontSize: 30,
+                    )
                     ),
                   ),
                 ],

@@ -8,6 +8,9 @@ class PersonAcc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 144, 210, 211),
+      ),
       body: Column(
         children: [
           const Expanded(flex: 2, child: _TopPortion()),
