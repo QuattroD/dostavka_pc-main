@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 
 List<String> basketuser = <String>[];
+List<String> test = <String>[];
 
 class ItemPages extends StatefulWidget {
   const ItemPages({super.key});
@@ -11,10 +12,15 @@ class ItemPages extends StatefulWidget {
   State<ItemPages> createState() => _ItemPagesState();
 }
 
+
   class _ItemPagesState extends State<ItemPages> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('ItemsShop').snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if(!snapshot.hasData) return const Text('No collection');
+        return ListView(
       children: itemList.map(
         (e) {
           return GFCard( 
@@ -27,7 +33,7 @@ class ItemPages extends StatefulWidget {
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.fill
               ),
-            content: Text(e.title.toString()),
+            content: Text(''),
             showImage: true,
             buttonBar: GFButtonBar(
               children: <Widget>[
@@ -76,6 +82,8 @@ class ItemPages extends StatefulWidget {
           );
         }
       ).toList(),
+    );
+      },
     );
   }
 } 

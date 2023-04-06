@@ -16,7 +16,7 @@ class BasketPage extends StatefulWidget {
   onItemSearch(String value) {
     setState(
       () {
-        newBasketUser = basketuser.where((element) => element == searchController.toString()).toList();
+        newBasketUser = basketuser.where((element) => element.toLowerCase().contains(value)).toList();
       },
     );
   }
@@ -68,7 +68,7 @@ class BasketPage extends StatefulWidget {
           },
         )
       ) : ListView.builder(
-      itemCount: basketuser.length,
+      itemCount: newBasketUser.length,
       prototypeItem: ListTile(
         title: Text(newBasketUser.first),
       ),
@@ -79,9 +79,10 @@ class BasketPage extends StatefulWidget {
             onPressed: () {     
               setState(() {
                 basketuser[index];
+                newBasketUser[index];
               });
-              FirebaseFirestore.instance.collection('Basket').doc(basketuser[index]).delete();
-              basketuser.remove(basketuser[index]);
+              FirebaseFirestore.instance.collection('Basket').doc(newBasketUser[index]).delete();
+              newBasketUser.remove(newBasketUser[index]);
                            
             }, 
             icon: const Icon(Icons.delete_forever)
