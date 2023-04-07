@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -45,14 +46,16 @@ class ItemPages extends StatefulWidget {
                       basketuser.length;
                     });
                     basketuser.add(snap[index]['title']); 
-                    FirebaseFirestore.instance.collection('Basket').doc(user.currentUser!.email).collection(snap[index]['title']).add(
-                      {
-                        'id': snap[index]['id'],
-                        'discription': snap[index]['discription'],
-                        'price': snap[index]['price'],
-                        'title': snap[index]['title'],
-                      }
-                    );
+                    FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(snap[index]['title']).set(
+                    {
+                      'id': snap[index]['id'],
+                      //придумать как увеличивать count на 1 при клике
+                      'count': snap[index]['count'] + 1,
+                      'discription': snap[index]['discription'],
+                      'price': snap[index]['price'],
+                      'title': snap[index]['title'],
+                    }
+                  );
                   },
                   text: 'Add',
                   color: const Color.fromARGB(255, 59, 158, 162),

@@ -171,8 +171,8 @@ class _TopPortion extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  bottom: 55,
-                  right: 53,
+                  bottom: 0,
+                  right: 0,
                   child: IconButton(
                     icon: const Icon(
                       Icons.photo_camera,

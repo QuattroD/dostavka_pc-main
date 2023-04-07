@@ -110,7 +110,7 @@ class BasketPage extends StatefulWidget {
                 basketuser[index];
                 newBasketUser[index];
               });
-                FirebaseFirestore.instance.collection('Basket').doc(user.currentUser!.email).delete();
+                FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(newBasketUser[index]).delete();
                 newBasketUser.remove(newBasketUser[index]);
                            
                 }, 
