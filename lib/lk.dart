@@ -154,8 +154,7 @@ class _TopPortion extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')),
+                        image: NetworkImage('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')),
                   ),
                 ),
                 Positioned(
@@ -169,6 +168,20 @@ class _TopPortion extends StatelessWidget {
                       decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 38, 163, 42), shape: BoxShape.circle),
                     ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 55,
+                  right: 53,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.photo_camera,
+                      color: Color.fromARGB(150, 255, 255, 255),
+                      size: 40,
+                    ),
+                    hoverColor: Colors.orange.withOpacity(1),
+                    
+                    onPressed: () {},
                   ),
                 ),
               ],

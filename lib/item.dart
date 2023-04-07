@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 List<String> basketuser = <String>[];
 List<String> test = <String>[];
+
+var user = FirebaseAuth.instance;
 
 class ItemPages extends StatefulWidget {
   const ItemPages({super.key});
@@ -19,21 +22,20 @@ class ItemPages extends StatefulWidget {
     return StreamBuilder(
       stream: FirebaseFirestore.instance.collection('ItemsShop').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return const Text('No collection');
-        return ListView(
-      children: itemList.map(
-        (e) {
+      final snap = snapshot.data!.docs;
+      return ListView.builder(
+        itemBuilder: (context, index) {
           return GFCard( 
             elevation: 10,
             boxFit: BoxFit.fill,
             titlePosition: GFPosition.start,
             image: Image.network(
-              e.img.toString(),
+              snap[index]['img'],
               height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.fill
               ),
-            content: Text(''),
+            content: Text(snap[index]['title']),
             showImage: true,
             buttonBar: GFButtonBar(
               children: <Widget>[
@@ -42,13 +44,13 @@ class ItemPages extends StatefulWidget {
                     setState(() {
                       basketuser.length;
                     });
-                    basketuser.add(e.title.toString()); 
-                    FirebaseFirestore.instance.collection('Basket').doc(e.title.toString()).set(
+                    basketuser.add(snap[index]['title']); 
+                    FirebaseFirestore.instance.collection('Basket').doc(user.currentUser!.email).collection(snap[index]['title']).add(
                       {
-                        'id': e.id,
-                        'discription': e.discription,
-                        'price': e.price,
-                        'title': e.title,
+                        'id': snap[index]['id'],
+                        'discription': snap[index]['discription'],
+                        'price': snap[index]['price'],
+                        'title': snap[index]['title'],
                       }
                     );
                   },
@@ -64,11 +66,17 @@ class ItemPages extends StatefulWidget {
                           borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(25),
                                 topRight: Radius.circular(25)
-                              ),
+                            ),
                           child: Container(
                             color: const Color.fromARGB(255, 59, 158, 162),
                             height: 400,
-                            child: Text(e.title.toString()),                         
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Text(snap[index]['title'])
+                                ],
+                              ),
+                            ),                         
                           )
                         );
                       }
@@ -80,8 +88,8 @@ class ItemPages extends StatefulWidget {
               ],
             ),
           );
-        }
-      ).toList(),
+        },
+        itemCount: snap.length,
     );
       },
     );

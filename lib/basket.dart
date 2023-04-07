@@ -1,7 +1,7 @@
 import 'item.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class BasketPage extends StatefulWidget {
   const BasketPage({super.key});
@@ -13,6 +13,7 @@ class BasketPage extends StatefulWidget {
   class _BasketPagesState extends State<BasketPage> {
   TextEditingController searchController = TextEditingController();
   List<String> newBasketUser = List.from(basketuser);
+  var user = FirebaseAuth.instance;
   onItemSearch(String value) {
     setState(
       () {
@@ -42,7 +43,7 @@ class BasketPage extends StatefulWidget {
             onPressed: () {
               setState(() {
                 searchController.clear();
-
+                onItemSearch('');
               });
             },
             icon: const Icon(Icons.close),
@@ -69,29 +70,58 @@ class BasketPage extends StatefulWidget {
         )
       ) : ListView.builder(
       itemCount: newBasketUser.length,
-      prototypeItem: ListTile(
-        title: Text(newBasketUser.first),
-      ),
+      shrinkWrap: true,
+      primary: false,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(newBasketUser[index]),
-          leading: IconButton(
+        return Container(
+          height: 70,
+          width: double.infinity,
+          margin: const EdgeInsets.only(top: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(2, 2),
+                blurRadius: 10,
+              )
+            ]
+          ),
+          child: Stack(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  newBasketUser[index],
+                  style: const TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                alignment: Alignment.centerRight,
+                child: IconButton(
             onPressed: () {     
               setState(() {
                 basketuser[index];
                 newBasketUser[index];
               });
-              FirebaseFirestore.instance.collection('Basket').doc(newBasketUser[index]).delete();
-              newBasketUser.remove(newBasketUser[index]);
+                FirebaseFirestore.instance.collection('Basket').doc(user.currentUser!.email).delete();
+                newBasketUser.remove(newBasketUser[index]);
                            
-            }, 
-            icon: const Icon(Icons.delete_forever)
-          ),
-          textColor: Colors.white,
-          tileColor: const Color.fromARGB(255, 167, 205, 206),        
-        );
-      },
-    ),
+                }, 
+                  icon: const Icon(Icons.delete_forever)
+                ),
+              )
+              ],
+            ),      
+          );
+        },
+      ),
     );
-  }
+  }  
 }
