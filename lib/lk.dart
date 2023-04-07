@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 var currentUser = FirebaseAuth.instance.currentUser;
 
@@ -120,9 +122,36 @@ class ProfileInfoItem {
   const ProfileInfoItem(this.title, this.value);
 }
 
-class _TopPortion extends StatelessWidget {
-  const _TopPortion({Key? key}) : super(key: key);
+class _TopPortion extends StatefulWidget {
+  const _TopPortion({super.key});
 
+  @override
+  State<_TopPortion> createState() => __TopPortionState();
+}
+
+class __TopPortionState extends State<_TopPortion> {
+File? _file;
+
+void _getImageFromPhotoLibrary(context) {
+  _getFile(ImageSource.gallery, context);
+}
+
+Future<void> _getFile(ImageSource source, BuildContext context) async {
+  try {
+    print(source);
+    final file = await ImagePicker().pickImage(source: source);
+    setState(() {
+      _file = File(file!.path);
+    });
+  } catch (e) {
+    print(e);
+  }
+}
+
+String get buttonText => "Записать видео";
+
+IconData get buttonIcon => Icons.photo_camera;
+  
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -149,26 +178,13 @@ class _TopPortion extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 38, 163, 42), shape: BoxShape.circle),
-                    ),
-                  ),
+                        image: FileImage(_file!)),
+                  )
                 ),
                 Positioned(
                   bottom: 0,
@@ -176,12 +192,13 @@ class _TopPortion extends StatelessWidget {
                   child: IconButton(
                     icon: const Icon(
                       Icons.photo_camera,
-                      color: Color.fromARGB(150, 255, 255, 255),
+                      color: Color.fromARGB(255, 0, 0, 0),
                       size: 40,
                     ),
-                    hoverColor: Colors.orange.withOpacity(1),
-                    
-                    onPressed: () {},
+                    onPressed: () {
+                      _getImageFromPhotoLibrary(context);
+
+                    },
                   ),
                 ),
               ],
