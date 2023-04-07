@@ -183,6 +183,7 @@ IconData get buttonIcon => Icons.photo_camera;
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.cover,
+                        //написать тернарный оператор 'если _file пуст, то загружаем NetworkImage'
                         image: FileImage(_file!)),
                   )
                 ),

@@ -53,7 +53,12 @@ class ItemPages extends StatefulWidget {
                     {
                       'id': snap[index]['id'],
                       'count': snap[index]['count'] + 1,
-                      'discription': snap[index]['discription'],
+                      'Connectors': snap[index]['Connectors'],
+                      'Features': snap[index]['Features'],
+                      'Memory': snap[index]['Memory'],
+                      'Interface': snap[index]['Interface'],
+                      'Nutrition': snap[index]['Nutrition'],
+                      'Techproccesor': snap[index]['Techproccesor'],
                       'price': snap[index]['price'],
                       'title': snap[index]['title'],
                     }
@@ -75,7 +80,6 @@ class ItemPages extends StatefulWidget {
                           child: Container(                          
                             color: const Color.fromARGB(255, 59, 158, 162),
                             height: 400,
-                            child: Center(
                               child: Column(
                                 children: [
                                   Container(margin: const EdgeInsets.only(top: 12),),
@@ -88,7 +92,55 @@ class ItemPages extends StatefulWidget {
                                   ),
                                   Container(margin: const EdgeInsets.only(top: 12),),
                                   Text(
-                                    'Discription:' + ' ' +  snap[index]['discription'],
+                                    'VideoChipset:' + ' ' +  snap[index]['VideoChipset'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Interface:' + ' ' +  snap[index]['Interface'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Memory:' + ' ' +  snap[index]['Memory'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Nutrition:' + ' ' +  snap[index]['Nutrition'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Techproccesor:' + ' ' +  snap[index]['Techproccesor'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Connectors:' + ' ' +  snap[index]['Connectors'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Features:' + ' ' +  snap[index]['Features'],
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20
@@ -103,8 +155,7 @@ class ItemPages extends StatefulWidget {
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),                         
+                              ),                                                   
                           )
                         );
                       }
