@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -36,7 +35,11 @@ class ItemPages extends StatefulWidget {
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.fill
               ),
-            content: Text(snap[index]['title']),
+            content: Text(
+              snap[index]['title'],
+              style: const TextStyle(
+                fontSize: 20
+              ),),
             showImage: true,
             buttonBar: GFButtonBar(
               children: <Widget>[
@@ -49,7 +52,6 @@ class ItemPages extends StatefulWidget {
                     FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(snap[index]['title']).set(
                     {
                       'id': snap[index]['id'],
-                      //придумать как увеличивать count на 1 при клике
                       'count': snap[index]['count'] + 1,
                       'discription': snap[index]['discription'],
                       'price': snap[index]['price'],
@@ -66,17 +68,40 @@ class ItemPages extends StatefulWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25)
-                            ),
-                          child: Container(
+                          // borderRadius: const BorderRadius.only(
+                          //       topLeft: Radius.circular(25),
+                          //       topRight: Radius.circular(25)
+                          //   ),
+                          child: Container(                          
                             color: const Color.fromARGB(255, 59, 158, 162),
                             height: 400,
                             child: Center(
                               child: Column(
                                 children: [
-                                  Text(snap[index]['title'])
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Name product:' + ' ' +  snap[index]['title'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Discription:' + ' ' +  snap[index]['discription'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
+                                  Container(margin: const EdgeInsets.only(top: 12),),
+                                  Text(
+                                    'Price:' + ' ' +  snap[index]['price'].toString() + '₽',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),                         

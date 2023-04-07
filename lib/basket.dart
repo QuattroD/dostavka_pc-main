@@ -31,7 +31,7 @@ class BasketPage extends StatefulWidget {
       appBar: AppBar(
         title: TextField(
           decoration: const InputDecoration(
-            label: Text('Name')
+            label: Text('Search')
           ),
           controller: searchController,
           onChanged: onItemSearch,
@@ -92,31 +92,32 @@ class BasketPage extends StatefulWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 20),
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: Text(
                   newBasketUser[index],
                   style: const TextStyle(
                     color: Colors.black54,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.only(left: 20),
-                alignment: Alignment.centerRight,
+                alignment: Alignment.centerLeft,
                 child: IconButton(
-            onPressed: () {     
-              setState(() {
-                basketuser[index];
-                newBasketUser[index];
-              });
-                FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(newBasketUser[index]).delete();
-                newBasketUser.remove(newBasketUser[index]);
-                           
+                onPressed: () {     
+                  setState(() {
+                    basketuser[index];
+                    newBasketUser[index];
+                  });
+                  FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(newBasketUser[index]).delete();
+                  newBasketUser.remove(newBasketUser[index]);                          
                 }, 
-                  icon: const Icon(Icons.delete_forever)
+                icon: const Icon(Icons.delete_forever,
+                size: 35,)
                 ),
-              )
+              ),
               ],
             ),      
           );

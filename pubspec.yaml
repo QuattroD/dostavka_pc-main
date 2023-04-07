@@ -36,6 +36,7 @@ dependencies:
   geolocator: ^9.0.2
   firebase_storage: ^11.0.15
   getwidget: ^2.0.4
+  image_picker: ^0.8.7+1
   flutter:
     sdk: flutter
 

@@ -32,33 +32,7 @@ class _ShopPageState extends State<ShopPage> {
                 icon: const Icon(Icons.shopping_cart),
               ),
             ],
-          ),
-          basketuser.isEmpty ? Container() :
-          Positioned(
-            child: Stack(
-              children: <Widget>[
-                const Icon(
-                  Icons.brightness_1,
-                  size: 30,
-                  color: Colors.amber,
-                ),
-                Positioned(
-                  top: 9,
-                  right: 11,
-                  child: Center(
-                    child: Text(
-                      basketuser.length.toString(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w500
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
+          ),         
         ],
       ),
       body: list.elementAt(0),
