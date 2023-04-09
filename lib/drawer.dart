@@ -62,11 +62,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
         ),
         ListTile(
           leading: const Icon(
-            Icons.home,
+            Icons.info_rounded,
             color: Color.fromARGB(255, 198, 218, 225)
           ),
           title: const Text(
-            'Home',
+            'About us',
             style: TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
           ),
           trailing: const Icon(

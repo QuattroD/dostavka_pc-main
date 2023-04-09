@@ -51,7 +51,7 @@ class ItemPages extends StatefulWidget {
                     FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(snap[index]['title']).set(
                     {
                       'id': snap[index]['id'],
-                      'count': snap[index]['count'] + 1,
+                      'count': snap[index]['count'],
                       'Connectors': snap[index]['Connectors'],
                       'Features': snap[index]['Features'],
                       'Memory': snap[index]['Memory'],
@@ -72,10 +72,6 @@ class ItemPages extends StatefulWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return ClipRRect(
-                          // borderRadius: const BorderRadius.only(
-                          //       topLeft: Radius.circular(25),
-                          //       topRight: Radius.circular(25)
-                          //   ),
                           child: Container(                          
                             color: const Color.fromARGB(255, 59, 158, 162),
                             height: 400,
@@ -91,7 +87,7 @@ class ItemPages extends StatefulWidget {
                                   ),
                                   Container(margin: const EdgeInsets.only(top: 12),),
                                   Text(
-                                    'VideoChipset:' + ' ' +  snap[index]['VideoChipset'],
+                                    'Video Chipset:' + ' ' +  snap[index]['VideoChipset'],
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20
@@ -123,7 +119,7 @@ class ItemPages extends StatefulWidget {
                                   ),
                                   Container(margin: const EdgeInsets.only(top: 12),),
                                   Text(
-                                    'Techproccesor:' + ' ' +  snap[index]['Techproccesor'],
+                                    'Tech proccesor:' + ' ' +  snap[index]['Techproccesor'],
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20

@@ -28,6 +28,14 @@ class _PersonAccState extends State<PersonAcc> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 144, 210, 211),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popAndPushNamed(context, '/');
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
+        ],
       ),
       body: Column(
         children: [

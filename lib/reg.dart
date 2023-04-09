@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dostavka_pc/model.dart';
 import 'package:dostavka_pc/service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 TextEditingController  login = TextEditingController();
@@ -143,15 +142,10 @@ class RegPage extends StatelessWidget {
                   onPressed: () async {
                     UserModel? user = await dbconnection.signUp(login.text, password.text);
                       if (user != null)
-                      {
-                        
-                      } else {
+                      {} 
+                      else {
                         return;
-                      }
-                      FirebaseFirestore.instance.collection(userinfo.currentUser!.email.toString()).doc('AccountInfo').set(
-                      {
-                        'Name': name,                     
-                      });
+                      }                  
                       Navigator.pushNamed(context, '/home');
                   },
                   child: const Text("Sign up"),

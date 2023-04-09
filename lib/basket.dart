@@ -22,8 +22,6 @@ class BasketPage extends StatefulWidget {
     );
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
