@@ -120,36 +120,7 @@ class EditProfilePage extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  controller: passwordConfirm,
-                  style: const TextStyle(color: Colors.white),
-                  obscureText: true,
-                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  decoration: InputDecoration(
-                    hintText: "Confirm password",
-                    label: const Text(
-                      "Confirm password",
-                    ),
-                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    prefixIcon: const Icon(
-                      Icons.password,
-                      color: Color.fromARGB(255, 233, 241, 243),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
+              ),          
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.06,
                 width: MediaQuery.of(context).size.width * 0.7,
@@ -168,7 +139,8 @@ class EditProfilePage extends StatelessWidget {
                     backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 126, 184, 185)),
                   ),
                   onPressed: ()  {
-                    userEdit.userChanges();
+                    
+                    Navigator.pushNamed(context, '/lk');
                   },
                   child: const Text("Edit"),
                 ),

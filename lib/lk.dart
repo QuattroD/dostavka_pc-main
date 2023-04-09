@@ -7,8 +7,22 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 var currentUser = FirebaseAuth.instance.currentUser;
 
-class PersonAcc extends StatelessWidget {
-  const PersonAcc({Key? key}) : super(key: key);
+class PersonAcc extends StatefulWidget {
+  const PersonAcc({super.key});
+
+  @override
+  State<PersonAcc> createState() => _PersonAccState();
+}
+
+class _PersonAccState extends State<PersonAcc> {
+  late String emailDrawer;
+  
+  @override
+  void initState() {
+  super.initState();  
+  emailDrawer = userInfo.currentUser!.email.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +39,7 @@ class PersonAcc extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    currentUser!.email.toString(),
+                    emailDrawer,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -204,9 +218,7 @@ Future<void> _getFile(ImageSource source, BuildContext context) async {
                     color: Colors.black,
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        fit: BoxFit.cover,
-                        //написать тернарный оператор 'если _file пуст, то загружаем NetworkImage'
-                        // image: isDefault == true ? FileImage(_file!) : NetworkImage("https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png") as ImageProvider),
+                        fit: BoxFit.cover,                    
                         image: img != '' ? NetworkImage(img) : const NetworkImage("https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png")),
                   )
                 ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:dostavka_pc/model.dart';
 import 'package:dostavka_pc/service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 TextEditingController  login = TextEditingController();
 TextEditingController  password = TextEditingController();
-
+TextEditingController  name = TextEditingController();
+var userinfo = FirebaseAuth.instance;
 DbConnection dbconnection = DbConnection();
 class RegPage extends StatelessWidget {
   const RegPage({super.key});
@@ -24,7 +27,7 @@ class RegPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Welcome to Machinalis scientia",
+                    "Welcome to { } Devkit",
                   style: TextStyle(
                     color: Color.fromARGB(255, 233, 241, 243),
                     fontSize: 30,
@@ -38,7 +41,7 @@ class RegPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  // controller: Globals.name,
+                  controller: name,
                   style: const TextStyle(color: Colors.white),
                   cursorColor: const Color.fromARGB(255, 233, 241, 243),
                   decoration: InputDecoration(
@@ -119,35 +122,7 @@ class RegPage extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  style: const TextStyle(color: Colors.white),
-                  obscureText: true,
-                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  decoration: InputDecoration(
-                    hintText: "Подтвердите пароль",
-                    label: const Text(
-                      "Confirm password",
-                    ),
-                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    prefixIcon: const Icon(
-                      Icons.password,
-                      color: Color.fromARGB(255, 233, 241, 243),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
+              ),           
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.06,
                 width: MediaQuery.of(context).size.width * 0.7,
@@ -173,6 +148,10 @@ class RegPage extends StatelessWidget {
                       } else {
                         return;
                       }
+                      FirebaseFirestore.instance.collection(userinfo.currentUser!.email.toString()).doc('AccountInfo').set(
+                      {
+                        'Name': name,                     
+                      });
                       Navigator.pushNamed(context, '/home');
                   },
                   child: const Text("Sign up"),

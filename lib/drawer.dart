@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 var userInfo = FirebaseAuth.instance;
 
-class MenuDrawer extends StatelessWidget {
+class MenuDrawer extends StatefulWidget {
   const MenuDrawer({super.key});
 
+  @override
+  State<MenuDrawer> createState() => _MenuDrawerState();
+}
+
+class _MenuDrawerState extends State<MenuDrawer> {
+  late String imgDrawer;
+  final storage = FirebaseStorage.instance;
+
+  @override
+  void initState() {
+    super.initState();  
+    imgDrawer = '';  
+    getImageUrl();
+  }
+
+  Future<void> getImageUrl() async {
+    final ref = storage.ref().child('ProfileImage').child(userInfo.currentUser!.email.toString());
+    final url = await ref.getDownloadURL();
+    setState(() {
+      imgDrawer = url;
+    });
+}
+  
   @override
   Widget build(BuildContext context) {
     return Drawer(  
@@ -29,9 +53,8 @@ class MenuDrawer extends StatelessWidget {
               ],
               currentAccountPicture: Container(
                 alignment: Alignment.topLeft,
-                child: const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png"),
+                child: CircleAvatar(
+                  backgroundImage: imgDrawer != '' ? NetworkImage(imgDrawer) : const NetworkImage("https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png")
                 ),
               ),
               accountName: Text(userInfo.currentUser!.email.toString()),
