@@ -1,7 +1,9 @@
+import 'package:dostavka_pc/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 var currentUser = FirebaseAuth.instance.currentUser;
 
@@ -123,7 +125,7 @@ class ProfileInfoItem {
 }
 
 class _TopPortion extends StatefulWidget {
-  const _TopPortion({super.key});
+  const _TopPortion();
 
   @override
   State<_TopPortion> createState() => __TopPortionState();
@@ -131,6 +133,29 @@ class _TopPortion extends StatefulWidget {
 
 class __TopPortionState extends State<_TopPortion> {
 File? _file;
+bool isDefault = false;
+late String img;
+final storage = FirebaseStorage.instance;
+
+@override
+void initState() {
+  super.initState();  
+  img = '';
+  getImageUrl();
+}
+
+Future<void> getImageUrl() async {
+  final ref = storage.ref().child('ProfileImage').child(userInfo.currentUser!.email.toString());
+  final url = await ref.getDownloadURL();
+  setState(() {
+    img = url;
+  });
+}
+
+Future <void> _uploadphotofile(mFileImage) async {
+  final  Reference storageReference = FirebaseStorage.instance.ref().child("ProfileImage");
+  storageReference.child(userInfo.currentUser!.email.toString()).putFile(_file!);
+}
 
 void _getImageFromPhotoLibrary(context) {
   _getFile(ImageSource.gallery, context);
@@ -138,19 +163,16 @@ void _getImageFromPhotoLibrary(context) {
 
 Future<void> _getFile(ImageSource source, BuildContext context) async {
   try {
-    print(source);
     final file = await ImagePicker().pickImage(source: source);
     setState(() {
       _file = File(file!.path);
+      isDefault = true;
+      _uploadphotofile(_file);
+      getImageUrl();
     });
   } catch (e) {
-    print(e);
   }
 }
-
-String get buttonText => "Записать видео";
-
-IconData get buttonIcon => Icons.photo_camera;
   
   @override
   Widget build(BuildContext context) {
@@ -184,7 +206,8 @@ IconData get buttonIcon => Icons.photo_camera;
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         //написать тернарный оператор 'если _file пуст, то загружаем NetworkImage'
-                        image: FileImage(_file!)),
+                        // image: isDefault == true ? FileImage(_file!) : NetworkImage("https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png") as ImageProvider),
+                        image: img != '' ? NetworkImage(img) : const NetworkImage("https://w7.pngwing.com/pngs/799/987/png-transparent-computer-icons-avatar-social-media-blog-font-awesome-avatar-heroes-computer-wallpaper-social-media.png")),
                   )
                 ),
                 Positioned(
