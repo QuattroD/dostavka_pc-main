@@ -110,7 +110,8 @@ class BasketPage extends StatefulWidget {
                     newBasketUser[index];
                   });
                   FirebaseFirestore.instance.collection(user.currentUser!.email.toString()).doc(newBasketUser[index]).delete();
-                  newBasketUser.remove(newBasketUser[index]);                          
+                  newBasketUser.remove(newBasketUser[index]);  
+                  basketuser.remove(basketuser[index]);                        
                 }, 
                 icon: const Icon(Icons.delete_forever,
                 size: 35,)
