@@ -14,7 +14,7 @@ class AuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool sign = false;  
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -24,10 +24,10 @@ class AuthPage extends StatelessWidget {
                 children: [
                   Text(
                     "{ } DevKit",
-                    style: GoogleFonts.lobster(
+                    style: GoogleFonts.rowdies(
                       textStyle: const TextStyle(
                       color: Color.fromARGB(255, 233, 241, 243),
-                      fontSize: 30,
+                      fontSize: 50,
                     )
                     ),
                   ),
@@ -108,7 +108,7 @@ class AuthPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 126, 184, 185)),
+                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 134, 145, 159)),
                   ),
                   onPressed: () async {
                     UserModel? user = await dbconnection.signIn(
@@ -122,7 +122,7 @@ class AuthPage extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                         return AlertDialog(
-                          backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+                          backgroundColor: const Color.fromARGB(255, 134, 145, 159),
                           title: const Text('Error', style: TextStyle(color: Color.fromARGB(255, 233, 241, 243))),
                           content: const Text('Invalid E-mail or Password', style: TextStyle(color: Color.fromARGB(255, 233, 241, 243))),
                           actions: <Widget>[

@@ -33,7 +33,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(  
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
         child: ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -41,7 +41,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(255, 126, 184, 185)
+                color: const Color.fromARGB(255, 134, 145, 159)
               ),
               otherAccountsPictures: [
                 IconButton(

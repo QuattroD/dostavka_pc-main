@@ -26,8 +26,10 @@ class _PersonAccState extends State<PersonAcc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 144, 210, 211),
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 134, 145, 159),
         actions: [
           IconButton(
             onPressed: () {
@@ -48,10 +50,11 @@ class _PersonAccState extends State<PersonAcc> {
                 children: [
                   Text(
                     emailDrawer,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold
+                    )
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -63,6 +66,7 @@ class _PersonAccState extends State<PersonAcc> {
                         },
                         heroTag: 'editprofile',
                         elevation: 0,
+                        backgroundColor: const Color.fromARGB(255, 255, 165, 92),
                         label: const Text("Edit profile"),
                         icon: const Icon(Icons.edit),
                       ),
@@ -75,7 +79,7 @@ class _PersonAccState extends State<PersonAcc> {
                         elevation: 0,
                         backgroundColor: Colors.red,
                         label: const Text("History"),
-                        icon: const Icon(Icons.shopping_basket),
+                        icon: const Icon(Icons.history_toggle_off),
                       ),
                     ],
                   ),
@@ -129,12 +133,15 @@ class _ProfileInfoRow extends StatelessWidget {
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
+                color: Colors.white
               ),
             ),
           ),
           Text(
             item.title,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: const TextStyle(
+              color: Colors.white
+            )
           )
         ],
       );
@@ -207,7 +214,7 @@ Future<void> _getFile(ImageSource source, BuildContext context) async {
               gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color.fromARGB(255, 59, 158, 162), Color.fromARGB(255, 144, 210, 211)]),
+                  colors: [Color.fromARGB(255, 59, 74, 92),Color.fromARGB(255, 134, 145, 159)]),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
@@ -236,12 +243,11 @@ Future<void> _getFile(ImageSource source, BuildContext context) async {
                   child: IconButton(
                     icon: const Icon(
                       Icons.photo_camera,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.white,
                       size: 40,
                     ),
                     onPressed: () {
                       _getImageFromPhotoLibrary(context);
-
                     },
                   ),
                 ),

@@ -17,9 +17,9 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        backgroundColor: const Color.fromARGB(255, 134, 145, 159),
         title: const Text('Select your position'),
         centerTitle: true,
       ),

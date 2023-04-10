@@ -11,11 +11,11 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       appBar: AppBar(
         title: const Text('Payment'),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        backgroundColor: const Color.fromARGB(255, 134, 145, 159),
         actions: [
           IconButton(onPressed: () {
             Navigator.pushNamed(context, '/yandex');

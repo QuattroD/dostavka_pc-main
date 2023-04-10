@@ -64,7 +64,7 @@ class ItemPages extends StatefulWidget {
                   );
                   },
                   text: 'Add',
-                  color: const Color.fromARGB(255, 59, 158, 162),
+                  color: const Color.fromARGB(255, 134, 145, 159),
                 ),
                 GFButton(
                   onPressed: () {
@@ -73,7 +73,7 @@ class ItemPages extends StatefulWidget {
                       builder: (BuildContext context) {
                         return ClipRRect(
                           child: Container(                          
-                            color: const Color.fromARGB(255, 59, 158, 162),
+                            color: const Color.fromARGB(255, 134, 145, 159),
                             height: 400,
                               child: Column(
                                 children: [
@@ -157,7 +157,7 @@ class ItemPages extends StatefulWidget {
                     );
                   },
                   text: 'Info',
-                  color: const Color.fromARGB(255, 59, 158, 162),
+                  color: Color.fromARGB(255, 134, 145, 159),
                 ),
               ],
             ),

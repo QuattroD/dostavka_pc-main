@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
           title: 'Fast and Secure',
           description: 'Delivery, installation and configuration of a turnkey computer',
           imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
-          bgColor: Colors.indigo,
+          bgColor:  Colors.indigo,
         ),
         OnboardingPageModel(
           title: 'Service centers',

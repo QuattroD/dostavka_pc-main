@@ -2,35 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:dostavka_pc/model.dart';
 import 'package:dostavka_pc/service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 TextEditingController  login = TextEditingController();
 TextEditingController  password = TextEditingController();
 TextEditingController  name = TextEditingController();
 var userinfo = FirebaseAuth.instance;
 DbConnection dbconnection = DbConnection();
-class RegPage extends StatelessWidget {
+
+class RegPage extends StatefulWidget {
   const RegPage({super.key});
+
+  @override
+  State<RegPage> createState() => _RegPageState();
+}
+
+class _RegPageState extends State<RegPage> {
+  bool hidePass = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        backgroundColor: const Color.fromARGB(255, 134, 145, 159),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Row(
+                Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Welcome to { } Devkit",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 233, 241, 243),
-                    fontSize: 30,
-                  ),
+                    "Welcome to { } DevKit",
+                    style: GoogleFonts.rowdies(
+                      textStyle: const TextStyle(
+                      color: Color.fromARGB(255, 233, 241, 243),
+                      fontSize: 30,
+                      )
+                    ),
                   ),
                 ],
               ),
@@ -40,39 +51,11 @@ class RegPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  controller: name,
-                  style: const TextStyle(color: Colors.white),
-                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  decoration: InputDecoration(
-                    hintText: "Введите имя",
-                    label: const Text(
-                      "Name",  
-                    ),
-                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
-                    prefixIcon: const Icon(
-                      Icons.person,
-                      color: Color.fromARGB(255, 233, 241, 243),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
                   controller: login,
                   style: const TextStyle(color: Colors.white),
                   cursorColor: const Color.fromARGB(255, 233, 241, 243),
                   decoration: InputDecoration(
-                    hintText: "Введите email",
+                    hintText: "Entry E-mail",
                     label: const Text(
                       "Email",
                     ),
@@ -99,9 +82,9 @@ class RegPage extends StatelessWidget {
                   controller: password,
                   style: const TextStyle(color: Colors.white),
                   cursorColor: const Color.fromARGB(255, 233, 241, 243),
-                  obscureText: true,
+                  obscureText: hidePass,
                   decoration: InputDecoration(
-                    hintText: "Введите пароль",
+                    hintText: "Entry password",
                     label: const Text(
                       "Password",
                     ),
@@ -121,7 +104,51 @@ class RegPage extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
-              ),           
+              ), 
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: TextField(
+                  style: const TextStyle(color: Colors.white),
+                  cursorColor: const Color.fromARGB(255, 233, 241, 243),
+                  obscureText: hidePass,
+                  decoration: InputDecoration(  
+                    suffixIcon: IconButton(
+                      color: const Color.fromARGB(255, 233, 241, 243),
+                      icon: hidePass == true ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          if(hidePass == true)
+                          {
+                            hidePass = false;
+                          }
+                          else
+                          {
+                            hidePass = true;
+                          }
+                        });
+                      },
+                    ),                 
+                    hintText: "Confrim password",
+                    label: const Text(
+                      "Confirm password",
+                    ),
+                    labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Color.fromARGB(255, 233, 241, 243))),
+                    prefixIcon: const Icon(
+                      Icons.password,
+                      color: Color.fromARGB(255, 233, 241, 243),                     
+                    ),
+                  ),
+                ),
+              ), 
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),         
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.06,
                 width: MediaQuery.of(context).size.width * 0.7,
@@ -137,7 +164,7 @@ class RegPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 126, 184, 185)),
+                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 134, 145, 159)),
                   ),
                   onPressed: () async {
                     UserModel? user = await dbconnection.signUp(login.text, password.text);

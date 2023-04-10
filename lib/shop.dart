@@ -16,12 +16,12 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+      backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       drawer: const MenuDrawer(),
       appBar: AppBar(
         title: const Text('{ } DevKit'),
         centerTitle: true,  
-        backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        backgroundColor: const Color.fromARGB(255, 134, 145, 159),
         actions: [
           Stack(
             children: <Widget>[

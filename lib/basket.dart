@@ -25,7 +25,7 @@ class BasketPage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: const Color.fromARGB(255, 59, 158, 162),
+    backgroundColor: const Color.fromARGB(255, 59, 74, 92),
       appBar: AppBar(
         title: TextField(
           decoration: const InputDecoration(
@@ -35,7 +35,7 @@ class BasketPage extends StatefulWidget {
           onChanged: onItemSearch,
         ),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 126, 184, 185),
+        backgroundColor: const Color.fromARGB(255, 134, 145, 159),
         actions: [
           IconButton(
             onPressed: () {
