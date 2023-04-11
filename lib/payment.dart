@@ -1,3 +1,4 @@
+import 'package:dostavka_pc/CreditCard.dart';
 import 'package:flutter/material.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -8,6 +9,9 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  final list = [
+    const CreditCardsPage()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +28,7 @@ class _PaymentPageState extends State<PaymentPage> {
           )
         ],
       ),
+      body: list.elementAt(0)
     );
   }
 }

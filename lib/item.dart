@@ -79,7 +79,7 @@ class ItemPages extends StatefulWidget {
                                 children: [
                                   Container(margin: const EdgeInsets.only(top: 12),),
                                   Text(
-                                    'Name product:' + ' ' +  snap[index]['title'],
+                                    'Name product:' + ' ' + snap[index]['title'],
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20
@@ -168,67 +168,4 @@ class ItemPages extends StatefulWidget {
       },
     );
   }
-} 
-
-class Item {
-  int? id;
-  String? title;
-  String? discription;
-  int? price;
-  String? img;
-  Item({this.id, this.title, this.discription, this.price, this.img});
-}
-
-List<Item> itemList = [
-  Item(
-    id: 1,
-    title: 'RTX 3060 Palit',
-    price: 40000,
-    img: 'https://i.pcmag.com/imagery/roundups/03IN5Ry7Nys41YSqJtZcQSr-1.1607129333.fit_lim.size_1200x630.jpg',
-    discription: 'test',
-  ),
-  Item(
-    id: 2,
-    title: 'GTX 1660 Palit',
-    price: 30000,
-    img: 'https://www.kitguru.net/wp-content/uploads/2019/10/featured-1.jpg',
-    discription: 'test',
-  ),
-  Item(
-    id: 3,
-    title: 'RX 580',
-    price: 29000,
-    img: 'https://ru.gecid.com/data/video/201902150800-55142/img/09_amd_radeon_rx_590.jpg',
-    discription: 'test',
-  ),
-  Item(
-    id: 4,
-    title: 'GTX 1660 Palit',
-    price: 40000,
-    img: 'https://www.kitguru.net/wp-content/uploads/2019/10/featured-1.jpg',
-    discription: 'test',
-  ),
-  Item(
-    id: 5,
-    title: 'RX 580',
-    price: 29000,
-    img: 'https://ru.gecid.com/data/video/201902150800-55142/img/09_amd_radeon_rx_590.jpg',
-    discription: 'test',
-  ),
-  Item(
-    id: 6,
-    title: 'GTX 1660 Palit',
-    price: 30000,
-    img: 'https://www.kitguru.net/wp-content/uploads/2019/10/featured-1.jpg',
-    discription: 'test',
-  ),
-  Item(
-    id: 7,
-    title: 'RX 580',
-    price: 29000,
-    img: 'https://ru.gecid.com/data/video/201902150800-55142/img/09_amd_radeon_rx_590.jpg',
-    discription: 'test',
-  ),
-];
-
-  
+}   

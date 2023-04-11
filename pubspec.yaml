@@ -36,6 +36,7 @@ dependencies:
   geolocator: ^9.0.2
   firebase_storage: ^11.1.0
   getwidget: ^2.0.4
+  masked_text_field: ^1.0.2
   image_picker: ^0.8.7+1
   flutter:
     sdk: flutter
@@ -71,6 +72,8 @@ flutter:
   assets:
       - assets/TestBG.jpg
       - assets/Lucy.jpg
+      - assets/mastercard.png
+      - assets/contact_less.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
