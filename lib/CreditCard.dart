@@ -23,27 +23,25 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
       stream: FirebaseFirestore.instance.collection('CreditCards-' + userInfo.currentUser!.email.toString()).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         final snap = snapshot.data!.docs;
-        return snap.isEmpty == true ? Container(
-          child: Column(
-            children: [
-              _buildTitleSection(
-                title: "Payment Details",
-                subTitle: "How would you like to pay ?"),
-              const SizedBox(
-                height: 15,
-              ),
-              _buildAddCardButton(
-              icon: const Icon(Icons.add),
-              color: const Color(0xFF081603),
-              context: context,
-              cardData: dataCard,
-              cardName: cardName,
-              cardNumbers: cardNumber,
-              ccv: ccv,
-              user: userInfo
-            )
-            ],
-          ),
+        return snap.isEmpty == true ? Column(
+          children: [
+            _buildTitleSection(
+              title: "Payment Details",
+              subTitle: "How would you like to pay ?"),
+            const SizedBox(
+              height: 15,
+            ),
+            _buildAddCardButton(
+            icon: const Icon(Icons.add),
+            color: const Color(0xFF081603),
+            context: context,
+            cardData: dataCard,
+            cardName: cardName,
+            cardNumbers: cardNumber,
+            ccv: ccv,
+            user: userInfo
+          )
+          ],
         ) : ListView.builder(
           itemCount: snap.length,
           itemBuilder: (context, index) {
@@ -57,7 +55,8 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
                 color: const Color.fromARGB(255, 9, 9, 67),
                 cardExpiration: snap[index]['DataCard'],
                 cardHolder: snap[index]['Name'],
-                cardNumber: snap[index]['NumberCard'],),
+                cardNumber: snap[index]['NumberCard'],
+                context: context),
             _buildAddCardButton(
               icon: const Icon(Icons.add),
               color: const Color(0xFF081603),
@@ -68,6 +67,7 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
               ccv: ccv,
               user: userInfo
             ),
+
             const SizedBox(
               height: 15,
             ),
@@ -82,7 +82,6 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
   }
 }
 
-// Build the title section
 Column _buildTitleSection({@required title, @required subTitle}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,19 +109,49 @@ Column _buildTitleSection({@required title, @required subTitle}) {
   );
 }
 
-// Build the credit card widget
 Card _buildCreditCard(
     {required Color color,
     required String cardNumber,
     required String cardHolder,
-    required String cardExpiration}) {
+    required String cardExpiration,
+    required BuildContext context}) {
   return Card(
     elevation: 4.0,
     color: color,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(14),
     ),
-    child: Container(
+    child: InkWell(
+      onTap: () {
+        showModalBottomSheet(
+          elevation: 10,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          context: context, 
+          builder: (BuildContext context) {
+            return Container(
+              child: Column(
+                children: [
+                  const SizedBox(height: 30,),
+                  const Icon(Icons.check_circle, color: Colors.green, size: 100,),
+                  const SizedBox(height: 30,),
+                  const Center(
+                    child: Text('The payment was successful', style: TextStyle(fontSize: 25),),
+                  ),
+                  const SizedBox(height: 15,),
+                  ElevatedButton(
+                    
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/shop');
+                    }, 
+                    child: Text('Go store', style: TextStyle(fontSize: 25),))
+                ],
+              ),
+            );
+          }
+        );
+      },
+      child: Container(
       height: 200,
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 22.0),
       child: Column(
@@ -153,10 +182,10 @@ Card _buildCreditCard(
         ],
       ),
     ),
+    )
   );
 }
 
-// Build the top row containing logos
 Row _buildLogosBlock() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -176,7 +205,6 @@ Row _buildLogosBlock() {
   );
 }
 
-// Build Column containing the cardholder and expiration information
 Column _buildDetailsBlock({required String label, required String value}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,7 +223,6 @@ Column _buildDetailsBlock({required String label, required String value}) {
   );
 }
 
-// Build the FloatingActionButton
 Container _buildAddCardButton({
   required Icon icon,
   required Color color,
