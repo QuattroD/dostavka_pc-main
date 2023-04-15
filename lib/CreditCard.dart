@@ -129,8 +129,11 @@ Card _buildCreditCard(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           context: context, 
           builder: (BuildContext context) {
-            return Container(
-              child: Column(
+            return StreamBuilder(
+              stream: FirebaseFirestore.instance.collection(userInfo.currentUser!.email.toString()).snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                final snap = snapshot.data!.docs;
+                return Column(
                 children: [
                   const SizedBox(height: 30,),
                   const Icon(Icons.check_circle, color: Colors.green, size: 100,),
@@ -139,14 +142,28 @@ Card _buildCreditCard(
                     child: Text('The payment was successful', style: TextStyle(fontSize: 25),),
                   ),
                   const SizedBox(height: 15,),
+                  ListView.builder(
+                    itemCount: snap.length,
+                    shrinkWrap: true,
+                    primary: false,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          SizedBox(height: 15,),
+                          Text(snap[index]['title'].toString() + ' ' + 'x' + snap[index]['count'].toString())
+                        ],
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 15,),
                   ElevatedButton(
-                    
                     onPressed: () {
                       Navigator.pushNamed(context, '/shop');
                     }, 
                     child: Text('Go store', style: TextStyle(fontSize: 25),))
                 ],
-              ),
+              );
+              },
             );
           }
         );
