@@ -114,7 +114,7 @@ class _RegPageState extends State<RegPage> {
                   decoration: InputDecoration(  
                     suffixIcon: IconButton(
                       color: const Color.fromARGB(255, 233, 241, 243),
-                      icon: hidePass == true ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                      icon: hidePass == true ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
                       onPressed: () {
                         setState(() {
                           if(hidePass == true)

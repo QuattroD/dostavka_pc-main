@@ -7,9 +7,15 @@ TextEditingController  login = TextEditingController();
 TextEditingController  password= TextEditingController();
 
 DbConnection dbconnection = DbConnection();
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
-  
+
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  bool hidePass = true;
   @override
   Widget build(BuildContext context) {
     bool sign = false;  
@@ -69,9 +75,25 @@ class AuthPage extends StatelessWidget {
                 child: TextField(
                   controller: password,
                   style: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                  obscureText: true,
+                  obscureText: hidePass,
                   cursorColor: const Color.fromARGB(255, 233, 241, 243),
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      color: const Color.fromARGB(255, 233, 241, 243),
+                      icon: hidePass == true ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          if(hidePass == true)
+                          {
+                            hidePass = false;
+                          }
+                          else
+                          {
+                            hidePass = true;
+                          }
+                        });
+                      },
+                    ),
                     hintText: "Введите пароль",
                     label: const Text(
                       "Password",

@@ -1,4 +1,5 @@
 import 'package:dostavka_pc/drawer.dart';
+import 'package:dostavka_pc/lk.dart';
 import 'package:flutter/material.dart';
 import 'package:masked_text_field/masked_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,7 +21,7 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('CreditCards-' + userInfo.currentUser!.email.toString()).snapshots(),
+      stream: FirebaseFirestore.instance.collection('CreditCards-${userInfo.currentUser!.email}').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         final snap = snapshot.data!.docs;
         return snap.isEmpty == true ? Column(
@@ -56,7 +57,9 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
                 cardExpiration: snap[index]['DataCard'],
                 cardHolder: snap[index]['Name'],
                 cardNumber: snap[index]['NumberCard'],
-                context: context),
+                context: context,
+                cardName: snap[index]['Name'],
+                ccv: snap[index]['CCV']),
             _buildAddCardButton(
               icon: const Icon(Icons.add),
               color: const Color(0xFF081603),
@@ -114,7 +117,9 @@ Card _buildCreditCard(
     required String cardNumber,
     required String cardHolder,
     required String cardExpiration,
-    required BuildContext context}) {
+    required BuildContext context,
+    required String cardName,
+    required String ccv,}) {
   return Card(
     elevation: 4.0,
     color: color,
@@ -122,6 +127,9 @@ Card _buildCreditCard(
       borderRadius: BorderRadius.circular(14),
     ),
     child: InkWell(
+      onLongPress: () {
+        FirebaseFirestore.instance.collection('CreditCards-' + userInfo.currentUser!.email.toString()).doc(cardName + ccv).delete();
+      },
       onTap: () {
         showModalBottomSheet(
           elevation: 10,
@@ -149,8 +157,8 @@ Card _buildCreditCard(
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          SizedBox(height: 15,),
-                          Text(snap[index]['title'].toString() + ' ' + 'x' + snap[index]['count'].toString())
+                          const SizedBox(height: 15,),
+                          Text('${snap[index]['title']} x${snap[index]['count']} Total sum:${snap[index]['count'] * snap[index]['price']}')
                         ],
                       );
                     },
@@ -158,9 +166,14 @@ Card _buildCreditCard(
                   const SizedBox(height: 15,),
                   ElevatedButton(
                     onPressed: () {
+                        FirebaseFirestore.instance.collection('history-' + currentUser!.email.toString()).add({
+                          'title': snap[0]['title'],
+                          'price': snap[0]['price'],
+                          'count': snap[0]['count']
+                        });
                       Navigator.pushNamed(context, '/shop');
                     }, 
-                    child: Text('Go store', style: TextStyle(fontSize: 25),))
+                    child: const Text('Go store', style: TextStyle(fontSize: 25),))
                 ],
               );
               },
@@ -277,7 +290,7 @@ Container _buildAddCardButton({
                       },
                       mask: '',
                       inputDecoration: InputDecoration(
-                        hintText: "DAVLETSHIN BULAT",
+                        hintText: "SURNAME NAME",
                         hintStyle: const TextStyle(color: Colors.white),
                         label: const Text(
                           "Entry name, surname",
@@ -411,7 +424,7 @@ Container _buildAddCardButton({
                     color: Colors.white,
                     iconSize: 50,
                     onPressed: () {
-                      FirebaseFirestore.instance.collection('CreditCards-' + userInfo.currentUser!.email.toString()).add(
+                      FirebaseFirestore.instance.collection('CreditCards-' + userInfo.currentUser!.email.toString()).doc(cardName.text + ccv.text).set(
                     {
                       'Name': cardName.text,
                       'NumberCard': cardNumbers.text,

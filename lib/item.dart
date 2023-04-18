@@ -18,8 +18,8 @@ class _ItemPagesState extends State<ItemPages> {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance.collection('ItemsShop').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        final snap = snapshot.data!.docs;
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot?> snapshot) {
+        var snap = snapshot.data!.docs;
         return ListView.builder(
           itemBuilder: (context, index) {
             return GFCard(
@@ -48,14 +48,8 @@ class _ItemPagesState extends State<ItemPages> {
                           .collection(user.currentUser!.email.toString())
                           .doc(snap[index]['title'])
                           .set({
-                        'id': snap[index]['id'],
+                        'description': snap[index]['description'],
                         'count': snap[index]['count'],
-                        'Connectors': snap[index]['Connectors'],
-                        'Features': snap[index]['Features'],
-                        'Memory': snap[index]['Memory'],
-                        'Interface': snap[index]['Interface'],
-                        'Nutrition': snap[index]['Nutrition'],
-                        'Techproccesor': snap[index]['Techproccesor'],
                         'price': snap[index]['price'],
                         'title': snap[index]['title'],
                       });
@@ -88,76 +82,20 @@ class _ItemPagesState extends State<ItemPages> {
                                     margin: const EdgeInsets.only(top: 12),
                                   ),
                                   Text(
-                                    'Video Chipset:' +
-                                        ' ' +
-                                        snap[index]['VideoChipset'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
-                                    'Interface:' +
-                                        ' ' +
-                                        snap[index]['Interface'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
-                                    'Memory:' + ' ' + snap[index]['Memory'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
-                                    'Nutrition:' +
-                                        ' ' +
-                                        snap[index]['Nutrition'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
-                                    'Tech proccesor:' +
-                                        ' ' +
-                                        snap[index]['Techproccesor'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
-                                    'Connectors:' +
-                                        ' ' +
-                                        snap[index]['Connectors'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
-                                    'Features:' + ' ' + snap[index]['Features'],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                  ),
-                                  Text(
                                     'Price:' +
                                         ' ' +
                                         snap[index]['price'].toString() +
                                         '₽',
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 12),
+                                  ),
+                                  Text(
+                                    'Description:' +
+                                        ' ' +
+                                        snap[index]['description'].toString(),
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),

@@ -68,7 +68,7 @@ class _BasketPagesState extends State<BasketPage> {
                           children: [
                             Container(
                               margin: const EdgeInsets.only(left: 20),
-                              alignment: Alignment(-0.55, 0),
+                              alignment: const Alignment(-0.55, 0),
                               child: Text(
                                 snap[index]['title'],
                                 style: const TextStyle(
@@ -135,7 +135,7 @@ class _BasketPagesState extends State<BasketPage> {
                             Container(
                                 alignment: const Alignment(0.4, 0),
                                 child: Text(
-                                  (snap[index]['price'] * snap[index]['count']).toString() +'₽',
+                                  '${snap[index]['price'] * snap[index]['count']}₽',
                                   style: const TextStyle(fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold),
                                 )),
                           ],
