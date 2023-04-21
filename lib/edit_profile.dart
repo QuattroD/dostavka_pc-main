@@ -38,7 +38,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Edit profile",
+                    "Change password",
                   style: TextStyle(
                     color: Color.fromARGB(255, 233, 241, 243),
                     fontSize: 30,

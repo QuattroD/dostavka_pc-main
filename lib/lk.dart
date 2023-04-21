@@ -67,7 +67,7 @@ class _PersonAccState extends State<PersonAcc> {
                         heroTag: 'editprofile',
                         elevation: 0,
                         backgroundColor: const Color.fromARGB(255, 255, 165, 92),
-                        label: const Text("Edit profile"),
+                        label: const Text("Change password"),
                         icon: const Icon(Icons.edit),
                       ),
                       const SizedBox(width: 16.0),

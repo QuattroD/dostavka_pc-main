@@ -82,10 +82,7 @@ class _ItemPagesState extends State<ItemPages> {
                                     margin: const EdgeInsets.only(top: 12),
                                   ),
                                   Text(
-                                    'Price:' +
-                                        ' ' +
-                                        snap[index]['price'].toString() +
-                                        '₽',
+                                    'Price: ${snap[index]['price']}₽',
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),

@@ -120,6 +120,14 @@ Card _buildCreditCard(
     required BuildContext context,
     required String cardName,
     required String ccv,}) {
+      deleteBasket() async
+  {
+    var collection = FirebaseFirestore.instance.collection(userInfo.currentUser!.email.toString());
+    var snapshots = await collection.get();
+    for (var doc in snapshots.docs) {
+    await doc.reference.delete();
+    }
+  }
   return Card(
     elevation: 4.0,
     color: color,
@@ -158,7 +166,7 @@ Card _buildCreditCard(
                       return Column(
                         children: [
                           const SizedBox(height: 15,),
-                          Text('${snap[index]['title']} x${snap[index]['count']} Total sum:${snap[index]['count'] * snap[index]['price']}')
+                          Text('${snap[index]['title']} ${snap[index]['count']}x Total sum:${snap[index]['count'] * snap[index]['price']}')
                         ],
                       );
                     },
@@ -166,11 +174,15 @@ Card _buildCreditCard(
                   const SizedBox(height: 15,),
                   ElevatedButton(
                     onPressed: () {
-                        FirebaseFirestore.instance.collection('history-' + currentUser!.email.toString()).add({
-                          'title': snap[0]['title'],
-                          'price': snap[0]['price'],
-                          'count': snap[0]['count']
+                      for(var i = 0; i < snap.length; i++)
+                      {
+                        FirebaseFirestore.instance.collection('history-${currentUser!.email}').add({
+                          'title': snap[i]['title'],
+                          'price': snap[i]['price'],
+                          'count': snap[i]['count']
                         });
+                        deleteBasket();
+                      }
                       Navigator.pushNamed(context, '/shop');
                     }, 
                     child: const Text('Go store', style: TextStyle(fontSize: 25),))
