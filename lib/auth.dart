@@ -49,9 +49,9 @@ class _AuthPageState extends State<AuthPage> {
                   style: const TextStyle(color: Colors.white),
                   cursorColor: const Color.fromARGB(255, 233, 241, 243),
                   decoration: InputDecoration(
-                    hintText: "Введите login",
+                    hintText: "Entry E-mail",
                     label: const Text(
-                      "Login",
+                      "E-mail",
                     ),
                     labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
                     focusedBorder: OutlineInputBorder(
@@ -75,7 +75,7 @@ class _AuthPageState extends State<AuthPage> {
                 child: TextField(
                   controller: password,
                   style: const TextStyle(color: Color.fromARGB(255, 233, 241, 243)),
-                  obscureText: hidePass,
+                  obscureText: hidePass,               
                   cursorColor: const Color.fromARGB(255, 233, 241, 243),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -94,7 +94,7 @@ class _AuthPageState extends State<AuthPage> {
                         });
                       },
                     ),
-                    hintText: "Введите пароль",
+                    hintText: "Entry password",
                     label: const Text(
                       "Password",
                     ),
