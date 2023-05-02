@@ -14,6 +14,8 @@ class ItemPages extends StatefulWidget {
 }
 
 class _ItemPagesState extends State<ItemPages> {
+  bool inBasket = false;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -41,9 +43,9 @@ class _ItemPagesState extends State<ItemPages> {
                     onPressed: () {
                       setState(() {
                         basketuser.length;
+                        inBasket;
                       });
                       basketuser.add(snap[index]['title']);
-
                       FirebaseFirestore.instance
                           .collection(user.currentUser!.email.toString())
                           .doc(snap[index]['title'])
@@ -53,6 +55,10 @@ class _ItemPagesState extends State<ItemPages> {
                         'price': snap[index]['price'],
                         'title': snap[index]['title'],
                       });
+                      final snackBar = SnackBar(
+                        content: Center(child: Text('This product in basket', style: TextStyle(fontSize: 20),),)
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     text: 'Add',
                     color: const Color.fromARGB(255, 134, 145, 159),
